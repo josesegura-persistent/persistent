@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             docker image pull josesegurapersistent/persistent-service
-            docker container stop persistent-service-prod
+            docker container stop persistent-prod
             docker container prune -f
-            docker run -d --name persistent-service-prod --restart unless-stopped -p 5000:80 -p 5015:443 josesegurapersistent/persistent-service
+            docker run -d --network=introspect-net --name persistent-prod --restart unless-stopped -p 7001:7001 josesegurapersistent/persistent-service
             docker image prune -f
